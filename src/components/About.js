@@ -15,7 +15,10 @@ export default function About(props) {
         </h3>
         <h2>Hope you find it useful.</h2>
         <h2>Designed by Akash Ghosh :) </h2>
-        <a href="https://linktr.ee/akashghosh256?utm_source=linktree_profile_share&ltsid=2f9c3d7e-d52b-495c-8838-eeabbbff080f" className="bi bi-box-arrow-up-right">Visit Linktree</a>
+        <a href="https://linktr.ee/akashghosh256?utm_source=linktree_profile_share&ltsid=2f9c3d7e-d52b-495c-8838-eeabbbff080f" target="_blank" rel="noopener noreferrer" className="bi bi-box-arrow-up-right">
+  Visit Linktree
+</a>
+{/* the rel="noopener noreferrer" attribute is added for security and performance reasons when using target="_blank" */}
 
       </div>
     </div>

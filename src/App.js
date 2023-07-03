@@ -87,7 +87,9 @@ function App() {
                   <About mode={mode} />
                 </div>
          </> } />
-          <Route path="*" element={<h1>404 Page Not Found</h1>} />
+          <Route path="*" element={<h1>404 Page Not Found   <a href="https://wordplayer.onrender.com/" target="_self" rel="noopener noreferrer" className="bi bi-box-arrow-up-right">
+Return Home
+</a></h1>} />
 
         </Routes>
   
