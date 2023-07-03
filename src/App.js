@@ -12,9 +12,7 @@ import About from "./components/About";
 // Using react router dom to create a single page application 
 // npm install react-router-dom
 //import { BrowserRouter as Router, Switch, Route , link } from "react-router-dom";
-//import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null);
@@ -63,34 +61,37 @@ function App() {
       document.title = "WordPlaYer - Light Mode";
     }
   };
-  const navigate = useNavigate();
 
-  // Redirect from /React_project to /
-  React.useEffect(() => {
-    navigate('/');
-  }, [navigate]);
 
 
   return (
-    <Router>
-    <Routes>
-      <Route path="/" element={<>
-        <Navbar title="WordPlaYer" mode={mode} toggleMode={toggleMode} />
-        <Alert alert={alert} />
-        <div className="container">
-          <TextForm heading="WordPlaYer: Your Text Helper " mode={mode} showAlert={showAlert} />
-        </div>
-      </>} />
-      <Route path="/about" element={<>
-        <Navbar title="WordPlaYer" mode={mode} toggleMode={toggleMode} />
-        <Alert alert={alert} />
-        <div className="container">
-          <About mode={mode} />
-        </div>
-      </>} />
-      <Route path="*" element={<h1>404 Page Not Found</h1>} />
-    </Routes>
-  </Router>
+    
+<BrowserRouter>
+     
+     <Routes>
+          
+          <Route
+           
+            path="/"
+            element={<>
+              <Navbar title="WordPlaYer" mode={mode} toggleMode={toggleMode} />
+                <Alert alert={alert}/>
+                <div className="container">
+                  <TextForm heading="WordPlaYer: Your Text Helper " mode={mode} showAlert={showAlert} />
+                </div>
+         </> } />
+          <Route path="/about" element={<>
+              <Navbar title="WordPlaYer" mode={mode} toggleMode={toggleMode} />
+                <Alert alert={alert}/>
+                <div className="container"  >
+                  <About mode={mode} />
+                </div>
+         </> } />
+          <Route path="*" element={<h1>404 Page Not Found</h1>} />
+
+        </Routes>
+  
+    </BrowserRouter>
   );
 }
 
