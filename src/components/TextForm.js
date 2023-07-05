@@ -74,7 +74,8 @@ export default function TextForm(props) {
     const Nospace = trimmedString.replace(/\s+/g, "");
     const characterCount = Nospace.length;
 
-    const readTime = 0.008 * wordsArray.length;
+    var readTime =( 0.008 * wordsArray.length);
+    readTime=readTime.toFixed(2);
 
     // Return an array with both counts
     return [wordsArray.length, characterCount, readTime];
@@ -85,11 +86,11 @@ export default function TextForm(props) {
   const handleReplace = (event) => {
     setOriginalString(text);
     const replacedString = originalString.replace(
-      new RegExp(searchWord, "gi"),  // new RegExp(searchWord, "gi") constructs a regular expression 
+      new RegExp(searchWord, "g"),  // new RegExp(searchWord, "gi") constructs a regular expression 
       //object using the RegExp constructor. The searchWord is passed as the pattern to search for, and the 
       // flags "gi" are used. The g flag stands for "global," which means it will replace all occurrences of the searchWord,
       //  not just the first one. The i flag stands for "ignore case," meaning it will match the searchWord regardless of the 
-      //  case (upper or lower).
+      //  case (upper or lower)., so i have removed i
       replaceWord
     );
 
@@ -97,6 +98,36 @@ export default function TextForm(props) {
     setOriginalString(replacedString);
     props.showAlert("Text Replaced", "success");  // custom alert
   };
+
+  const breakSentenceIntoLines = (event) => {
+    const words = text.split(' '); // Split the sentence into an array of words
+    let currentLine = '';
+    let newText = '';
+  var last_Index =0;
+    for (let i = 0; i < words.length; i++) {
+      last_Index = i;
+      const word = words[i];
+      if ((currentLine + word).split(' ').length <= 20) {
+        currentLine += word + ' ';
+      } else {
+        currentLine += '\n' + word + ' ';
+        newText += currentLine;
+        currentLine = '';
+      }
+    }
+    while(last_Index < words.length-1){
+      newText += words[last_Index] + ' ';
+      last_Index++;
+    }
+
+    
+    setText(newText);
+    setOriginalString(newText);
+  };
+  
+
+
+
 
   // In React, "state" refers to the object that holds the
   // dynamic data within a component, determining its
@@ -110,6 +141,7 @@ export default function TextForm(props) {
   const [originalString, setOriginalString] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [replaceWord, setReplaceWord] = useState("");
+  var lineLength =0;
 
   return (
     <>
@@ -171,6 +203,13 @@ export default function TextForm(props) {
             onClick={handleSpace}
           >
             Remove Spaces
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary mt-4 mx-2"
+            onClick={breakSentenceIntoLines}
+          >
+            Break into Lines
           </button>
           <button
             type="button"
