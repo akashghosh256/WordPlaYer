@@ -100,14 +100,14 @@ export default function TextForm(props) {
   };
 
   const breakSentenceIntoLines = (event) => {
-    const words = text.split(' '); // Split the sentence into an array of words
+    const words = text.trim().split(' '); // Split the sentence into an array of words
     let currentLine = '';
     let newText = '';
-  var last_Index =0;
+  
     for (let i = 0; i < words.length; i++) {
-      last_Index = i;
+     
       const word = words[i];
-      if ((currentLine + word).split(' ').length <= 20) {
+      if ((currentLine + word).trim().split(' ').length <= lineLength) {
         currentLine += word + ' ';
       } else {
         currentLine += '\n' + word + ' ';
@@ -115,10 +115,8 @@ export default function TextForm(props) {
         currentLine = '';
       }
     }
-    while(last_Index < words.length-1){
-      newText += words[last_Index] + ' ';
-      last_Index++;
-    }
+    newText += currentLine;
+  
 
     
     setText(newText);
@@ -141,7 +139,7 @@ export default function TextForm(props) {
   const [originalString, setOriginalString] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [replaceWord, setReplaceWord] = useState("");
-  var lineLength =0;
+  const [lineLength, setLineLength] = useState(20);
 
   return (
     <>
@@ -170,7 +168,12 @@ export default function TextForm(props) {
               'Convert case, and Replace'
             }
              ></textarea>
+              <h4>
+          {countWordsAndCharacters(text)[0]} words 
+        </h4>
 
+    
+ 
 {/* -------------------------------------------------buttons--------------------------------------------------------------------------- */}
 
             <button
@@ -286,7 +289,28 @@ export default function TextForm(props) {
             </div>
           </div>
 
-
+          <div className="container">
+              <div className="row">
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="searchWord">Enter Line Length:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter line length"
+                      style={{
+                        backgroundColor: props.mode === "dark" ? "#2a4c88" : "white",
+                        fontSize: "16px",
+                        color: props.mode === "dark" ? "white" : "black",
+                      }}
+                      id="lineLength"
+                      value={lineLength}
+                      onChange={(e) => setLineLength(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+              </div>
         </div>
       </div>
 
