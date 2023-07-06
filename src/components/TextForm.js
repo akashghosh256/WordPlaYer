@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import MoreInfo from "./MoreInfo";
+import Footer from "./Footer";
 //import {Link} from "react-router-dom";
 
 
@@ -293,11 +295,11 @@ export default function TextForm(props) {
               <div className="row">
                 <div className="col">
                   <div className="form-group">
-                    <label htmlFor="searchWord">Enter Line Length:</label>
+                    <label htmlFor="searchWord">Enter Lines Length (No. of words perline, for "Break into Lines"):</label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Enter line length"
+                      placeholder="for 10 it will break into lines after every 10 words"
                       style={{
                         backgroundColor: props.mode === "dark" ? "#2a4c88" : "white",
                         fontSize: "16px",
@@ -330,6 +332,24 @@ export default function TextForm(props) {
         {/* <h2>Preview</h2>
     <p>{text}</p> */}
       </div>
+
+      <div className="card"  
+    >
+      <div className="card-body"  style={{
+              backgroundColor: props.mode === "dark" ? "#2a4c88" : "white",
+              fontSize: "26px",
+              color: props.mode === "dark" ? "white" : "black",
+            }}>
+        <h1 className="text-center">More info</h1>
+        <MoreInfo mode={props.mode} />
+
+      </div>
+    </div>
+
+
+    <Footer mode={props.mode}  />
+
+
     </>
   );
 }

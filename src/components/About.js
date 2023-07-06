@@ -1,7 +1,8 @@
 import React from "react";
-
+import Footer from "./Footer";
 export default function About(props) {
   return (
+    <>
     <div className="card"  
     >
       <div className="card-body"  style={{
@@ -22,5 +23,7 @@ export default function About(props) {
 
       </div>
     </div>
+    <Footer mode={props.mode} />
+    </>
   );
 }
